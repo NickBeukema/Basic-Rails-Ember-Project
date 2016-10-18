@@ -1,24 +1,7 @@
-# README
+## Rails API and Ember
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a basic starter project using Rails in API mode, and Ember on the front-end.
 
-Things you may want to cover:
+### What this project starts with
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Basic authentication is used with Devise on the Rails side and Ember Simple Auth on the front end.
