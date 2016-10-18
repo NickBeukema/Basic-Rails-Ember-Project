@@ -18,10 +18,10 @@ Authentication is provided with [Devise](https://github.com/plataformatec/devise
 
 ### TODO
 
-[x] Main back-end and front-end technologies.
-[x] User Login and Authentication
-[ ] Unit Testing Framework
-[ ] Integrated Testing Framework
+- [x] Main back-end and front-end technologies.
+- [x] User Login and Authentication
+- [ ] Unit Testing Framework
+- [ ] Integrated Testing Framework
 
 ## How to set up this project
 
