@@ -10,8 +10,6 @@ Rails 5 on the back-end, set up in [API mode](http://edgeguides.rubyonrails.org/
 
 Ember 2.8 is used on the front-end, with [Ember Data](https://github.com/emberjs/data) 2.8. 
 
-The Ember pipeline is integrated into the Rails server through [Ember-CLI](https://github.com/ember-cli/ember-cli).
-
 ### Authentication
 
 Authentication is provided with [Devise](https://github.com/plataformatec/devise) on the back-end and [Ember Simple Auth](https://github.com/simplabs/ember-simple-auth) on the front-end.
@@ -24,12 +22,18 @@ Authentication is provided with [Devise](https://github.com/plataformatec/devise
 - [ ] Integrated Testing Framework
 
 ## How to set up this project
+```
+cd frontend
+npm install
+```
 
 ```
+cd ../
 bundle install
 rake db:create db:migrate
-rake ember:install
+bundle exec rake app:start
 ```
+
 
 
 
