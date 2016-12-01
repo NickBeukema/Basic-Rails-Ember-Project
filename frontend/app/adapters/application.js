@@ -3,5 +3,6 @@ import DataAdapterMixin from 'ember-simple-auth/mixins/data-adapter-mixin';
 
 export default JSONAPIAdapter.extend({
   namespace: 'api/v1',
-  authorizer: 'authorizer:devise'
+  authorizer: 'authorizer:devise',
+  host: config.API_HOST
 });

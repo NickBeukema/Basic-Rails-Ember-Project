@@ -7,12 +7,18 @@
 require 'cucumber/rails'
 require 'capybara/poltergeist'
 
-
 require 'autopsy/cucumber'
 require 'autopsy/poltergeist'
 
-Capybara.default_driver = :default_poltergeist_driver
-Capybara.javascript_driver = :default_poltergeist_driver
+Capybara.configure do |config|
+  config.run_server = false
+  config.default_driver = :default_poltergeist_driver
+  config.javascript_driver = :default_poltergeist_driver
+  config.app_host = 'http://localhost:4200'
+
+  config.default_selector = :css
+  config.raise_server_errors = false
+end
 
 AutopsyPoltergeist.init(:default_poltergeist_driver, {
   js_errors: false,
@@ -24,17 +30,19 @@ AutopsyPoltergeist.init(:default_poltergeist_driver, {
   window_size: [1200, 1200]
 })
 
-Capybara.default_selector = :css
-Capybara.raise_server_errors = false
-
 ActionController::Base.allow_rescue = false
 
 # Remove/comment out the lines below if your app doesn't have a database.
 # For some databases (like MongoDB and CouchDB) you may need to use :truncation instead.
 begin
-  DatabaseCleaner.strategy = :transaction
+  DatabaseCleaner.strategy = :truncation
 rescue NameError
   raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
+end
+
+Before do
+  visit '/'
+  page.execute_script('if (localStorage && localStorage.clear) localStorage.clear()')
 end
 
 # You may also want to configure DatabaseCleaner to use different strategies for certain features and scenarios.

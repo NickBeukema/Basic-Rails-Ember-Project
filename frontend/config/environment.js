@@ -39,6 +39,9 @@ module.exports = function(environment) {
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = '#ember-testing';
+    ENV.API_HOST = '';
+  } else {
+    ENV.API_HOST = (process.env.API_HOST || 'http://localhost:3000');
   }
 
   if (environment === 'production') {
