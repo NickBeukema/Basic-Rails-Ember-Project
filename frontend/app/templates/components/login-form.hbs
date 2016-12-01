@@ -1,11 +1,23 @@
 <form {{action "authenticate" on="submit"}}>
-  <label for="identification">Login</label>
-  {{input name="identification" value=identification placeholder="Enter Login"}}
+  <div class="form-group row">
+    <label for="identification" class="col-xs-2 col-form-label">Login</label>
+    <div class="col-xs-6">
+      {{input name="identification" classNames='form-control' value=identification placeholder="Enter Login"}}
+    </div>
+  </div>
 
-  <label for="password">Password</label>
-  {{input name="password" value=password type="password" placeholder="Enter Password"}}
+  <div class="form-group row">
+    <label for="password" class="col-xs-2 col-form-label">Password</label>
+    <div class="col-xs-6">
+      {{input name="password" classNames="form-control" value=password type="password" placeholder="Enter Password"}}
+    </div>
+  </div>
 
-  <button type="submit">Login</button>
+  <div class="form-group row">
+    <div class="offset-sm-2 col-sm-10">
+      <button type="submit" class="btn btn-primary">Login</button>
+    </div>
+  </div>
 </form>
 
 {{#if errorMessage}}
