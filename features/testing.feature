@@ -9,3 +9,7 @@ Feature: Todos
     Given I login as a user
     And I visit "/dashboard"
     Then I should see the dashboard
+
+    When I logout
+    Then I should see the login screen
+

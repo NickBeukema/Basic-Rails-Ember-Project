@@ -18,6 +18,10 @@ Given(/^I login as a user$/) do
   sleep 3
 end
 
+When(/^I logout$/) do
+  click_link("Logout")
+end
+
 Then(/^I should see the dashboard$/) do
   expect(page).to have_content('Protected Dashboard')
 end
