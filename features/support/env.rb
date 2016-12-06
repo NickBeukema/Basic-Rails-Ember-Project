@@ -18,7 +18,7 @@ Dir.chdir(Rails.root.join('frontend')) do
 end
 
 Dir.chdir(Rails.root) do
-  rails_server = IO.popen(['rails', 'server', '--port', '3001', '--environment', 'test', :err => [:child, :out]])
+  rails_server = IO.popen(['rails', 'server', '--port', '3001', '--environment', 'test', '--pid', 'tmp/pids/server2.pid', :err => [:child, :out]])
 end
 
 at_exit do
