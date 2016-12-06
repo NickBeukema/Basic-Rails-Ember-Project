@@ -44,4 +44,5 @@ group :test do
 
   gem 'fabrication'
   gem 'phantomjs', require: 'phantomjs/poltergeist'
+  gem 'faker'
 end
