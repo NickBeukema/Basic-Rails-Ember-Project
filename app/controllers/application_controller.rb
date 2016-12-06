@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::API
   include ActionController::HttpAuthentication::Token::ControllerMethods
 
-  before_filter :authenticate_user_from_token!
-  before_filter :authenticate_user!
+  before_action :authenticate_user_from_token!
+  before_action :authenticate_user!
 
   private
 
