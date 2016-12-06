@@ -10,11 +10,41 @@ require 'capybara/poltergeist'
 require 'autopsy/cucumber'
 require 'autopsy/poltergeist'
 
+ember_server = nil
+rails_server = nil
+
+Dir.chdir(Rails.root.join('frontend')) do
+  ember_server = IO.popen([{"API_HOST" => "http://localhost:3001"}, "ember", "server", "--proxy", "http://0.0.0.0:3001", "--port", "4201", "--live-reload", "false", :err => [:child, :out]])
+end
+
+Dir.chdir(Rails.root) do
+  rails_server = IO.popen(['rails', 'server', '--port', '3001', '--environment', 'test', :err => [:child, :out]])
+end
+
+at_exit do
+  Process.kill 9, rails_server.pid, ember_server.pid
+end
+
+Timeout::timeout(30) do
+  # wait for the magic words from ember
+  while running = ember_server.gets
+    if running =~ /Build successful/i
+      break
+    end
+  end
+  # when rails starts logging, it's running
+  while running = rails_server.gets
+    if running =~ /INFO/i
+      break
+    end
+  end
+end
+
 Capybara.configure do |config|
   config.run_server = false
   config.default_driver = :default_poltergeist_driver
   config.javascript_driver = :default_poltergeist_driver
-  config.app_host = 'http://localhost:4200'
+  config.app_host = 'http://localhost:4201'
 
   config.default_selector = :css
   config.raise_server_errors = false
@@ -45,23 +75,7 @@ Before do
   page.execute_script('if (localStorage && localStorage.clear) localStorage.clear()')
 end
 
-# You may also want to configure DatabaseCleaner to use different strategies for certain features and scenarios.
-# See the DatabaseCleaner documentation for details. Example:
-#
-#   Before('@no-txn,@selenium,@culerity,@celerity,@javascript') do
-#     # { :except => [:widgets] } may not do what you expect here
-#     # as Cucumber::Rails::Database.javascript_strategy overrides
-#     # this setting.
-#     DatabaseCleaner.strategy = :truncation
-#   end
-#
-#   Before('~@no-txn', '~@selenium', '~@culerity', '~@celerity', '~@javascript') do
-#     DatabaseCleaner.strategy = :transaction
-#   end
-#
-
 # Possible values are :truncation and :transaction
 # The :transaction strategy is faster, but might give you threading problems.
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
-
