@@ -6,9 +6,9 @@ This is a basic starter project using Rails in API mode, and Ember on the front-
 
 ### Rails and Ember
 
-Rails 5 on the back-end, set up in [API mode](http://edgeguides.rubyonrails.org/api_app.html). 
+Rails on the back-end, set up in [API mode](http://edgeguides.rubyonrails.org/api_app.html).
 
-Ember 2.8 is used on the front-end, with [Ember Data](https://github.com/emberjs/data) 2.8. 
+EmberJS is used on the front-end, with [Ember Data](https://github.com/emberjs/data).
 
 ### Authentication
 
@@ -18,8 +18,8 @@ Authentication is provided with [Devise](https://github.com/plataformatec/devise
 
 - [x] Main back-end and front-end technologies.
 - [x] User Login and Authentication
-- [ ] Unit Testing Framework
-- [ ] Integrated Testing Framework
+- [x] Unit Testing Framework
+- [x] Integrated Testing Framework
 
 ## How to set up this project
 ```
