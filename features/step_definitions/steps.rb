@@ -14,8 +14,7 @@ Given(/^I login as a user$/) do
   fill_in("identification", with: user.email)
   fill_in("password", with: 'abc123')
 
-  click_button("Login")
-  sleep 3
+  em { click_button("Login") }
 end
 
 When(/^I logout$/) do
@@ -29,4 +28,12 @@ end
 Then(/^I should see my email address in the navbar$/) do
   user = User.first
   expect(page).to have_css('.navbar', text: user.email)
+end
+
+def em(&blk)
+  wait_for_ajax_completion
+  wait_for_ember_run_loop_to_complete
+  blk.call
+  wait_for_ajax_completion
+  wait_for_ember_run_loop_to_complete
 end

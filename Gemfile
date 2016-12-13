@@ -45,4 +45,5 @@ group :test do
   gem 'fabrication'
   gem 'phantomjs', require: 'phantomjs/poltergeist'
   gem 'faker'
+  gem 'fire_poll', '1.2.0'
 end

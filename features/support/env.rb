@@ -79,3 +79,27 @@ end
 # The :transaction strategy is faster, but might give you threading problems.
 # See https://github.com/cucumber/cucumber-rails/blob/master/features/choose_javascript_database_strategy.feature
 Cucumber::Rails::Database.javascript_strategy = :truncation
+
+module EmberHelpers
+  def expect_dependencies
+    throw 'No jQuery' if page.browser.execute_script "return !$"
+    throw 'No Ember' if page.browser.execute_script "return !Ember"
+  end
+  def detect_ember_app
+    return page.execute_script "return $('body').hasClass('ember-application')"
+  end
+  def wait_for_ember_run_loop_to_complete
+    return unless detect_ember_app
+    FirePoll.patiently do
+      expect_dependencies
+      throw 'AJAX pending' if page.execute_script "return $('body').hasClass('ajax-pending')"
+      throw 'No pause in Ember run loop' unless page.execute_script "return !Ember.run.currentRunLoop"
+    end
+  end
+  def wait_for_ajax_completion
+    FirePoll.patiently do
+      expect(page.evaluate_script('$.active').to_i).to be_zero
+    end
+  end
+end
+World EmberHelpers
