@@ -9,6 +9,7 @@ Feature: Todos
     Given I login as a user
     And I visit "/dashboard"
     Then I should see the dashboard
+    And I should see my email address in the navbar
 
     When I logout
     Then I should see the login screen

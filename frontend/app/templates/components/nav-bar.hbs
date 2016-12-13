@@ -1,0 +1,15 @@
+<nav class="navbar navbar-light bg-faded">
+  {{link-to 'Example App' 'dashboard' classNames='navbar-brand'}}
+  <ul class="nav navbar-nav">
+    <li class="nav-item">
+      {{link-to 'Page 1' 'page1' classNames='nav-link'}}
+    </li>
+    <li class="nav-item">
+      {{link-to 'Page 2' 'page2' classNames='nav-link'}}
+    </li>
+  </ul>
+  <div class="navbar-text float-xs-right">
+    Currently Logged in as {{currentUser.user.email}}
+    <a href="#" {{action 'logout'}}>Logout</a>
+  </div>
+</nav>

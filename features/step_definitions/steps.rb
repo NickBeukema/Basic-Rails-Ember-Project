@@ -8,7 +8,7 @@ Then(/^I should see the login screen$/) do
 end
 
 Given(/^I login as a user$/) do
-  user = User.create(email: 'example.user@gmail.com', password: 'abc123')
+  user = Fabricate(:user)
   step %|I visit "/login"|
 
   fill_in("identification", with: user.email)
@@ -24,4 +24,9 @@ end
 
 Then(/^I should see the dashboard$/) do
   expect(page).to have_content('Protected Dashboard')
+end
+
+Then(/^I should see my email address in the navbar$/) do
+  user = User.first
+  expect(page).to have_css('.navbar', text: user.email)
 end
